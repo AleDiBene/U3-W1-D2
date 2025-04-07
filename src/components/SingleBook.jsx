@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
+import CommentArea from "./CommentArea";
 
 class SingleBook extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: false, // stato iniziale, il libro non è selezionato
-    };
-  }
+  state = {
+    selected: false, // Lo stato che determina se il libro è selezionato
+  };
 
   toggleSelected = () => {
     this.setState((prevState) => ({
-      selected: !prevState.selected, // Inverte il valore di selected
+      selected: !prevState.selected, // Inverte lo stato di selected
     }));
   };
 
@@ -20,19 +18,23 @@ class SingleBook extends Component {
     const { selected } = this.state;
 
     return (
-      <Card
-        className="mx-5 text-center"
-        style={{
-          width: "50%",
-          border: selected ? "2px solid red" : "none", // Aggiungi bordo rosso se selezionato
-        }}
-        onClick={this.toggleSelected} // Al clic cambia lo stato
-      >
-        <Card.Img variant="top" src={book.img} alt={book.title} />
-        <Card.Body>
-          <Card.Title>{book.title}</Card.Title>
-        </Card.Body>
-      </Card>
+      <div>
+        <Card
+          className="mx-5 text-center"
+          style={{
+            width: "50%",
+            border: selected ? "2px solid red" : "none", // Selezionato: bordato di rosso
+          }}
+          onClick={this.toggleSelected} // Cambia lo stato al click
+        >
+          <Card.Img variant="top" src={book.img} alt={book.title} />
+          <Card.Body>
+            <Card.Title>{book.title}</Card.Title>
+          </Card.Body>
+        </Card>
+
+        {selected && <CommentArea bookId={book.asin} />}
+      </div>
     );
   }
 }
