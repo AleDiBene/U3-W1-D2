@@ -1,17 +1,12 @@
 import React from "react";
-import SingleComment from "./SingleComment";
+import SingleComment from "./SingleComment"; // Importa SingleComment
 
 function CommentsList({ comments }) {
   return (
     <div>
-      <h4>Lista dei commenti:</h4>
-      <ul>
-        {comments.map((comment) => (
-          <li key={comment._id}>
-            <SingleComment comment={comment} />
-          </li>
-        ))}
-      </ul>
+      {comments.map((comment) => (
+        <SingleComment key={comment._id} comment={comment} />
+      ))}
     </div>
   );
 }

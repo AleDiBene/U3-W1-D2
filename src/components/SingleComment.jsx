@@ -2,11 +2,10 @@ import React from "react";
 
 function SingleComment({ comment }) {
   return (
-    <div className="comment">
-      <p>
-        <strong>{comment.username}</strong> ({comment.rating}/5):{" "}
-        {comment.comment}
-      </p>
+    <div>
+      <h5>{comment.author}</h5>
+      <p>{comment.text}</p>
+      <p>Voto: {comment.rating}</p>
     </div>
   );
 }
