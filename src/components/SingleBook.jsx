@@ -1,19 +1,40 @@
-import Button from "react-bootstrap/Button";
+import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
-import fantasy from "../data/fantasy.json"; // Assumiamo che sia un array di libri
 
-function SingleBook() {
-  const book = fantasy[0]; // Prende il primo elemento dell'array fantasy
-  return (
-    <>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={book.img} />
+class SingleBook extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: false, // stato iniziale, il libro non è selezionato
+    };
+  }
+
+  toggleSelected = () => {
+    this.setState((prevState) => ({
+      selected: !prevState.selected, // Inverte il valore di selected
+    }));
+  };
+
+  render() {
+    const { book } = this.props;
+    const { selected } = this.state;
+
+    return (
+      <Card
+        className="mx-5 text-center"
+        style={{
+          width: "50%",
+          border: selected ? "2px solid red" : "none", // Aggiungi bordo rosso se selezionato
+        }}
+        onClick={this.toggleSelected} // Al clic cambia lo stato
+      >
+        <Card.Img variant="top" src={book.img} alt={book.title} />
         <Card.Body>
           <Card.Title>{book.title}</Card.Title>
         </Card.Body>
       </Card>
-    </>
-  );
+    );
+  }
 }
 
 export default SingleBook;
